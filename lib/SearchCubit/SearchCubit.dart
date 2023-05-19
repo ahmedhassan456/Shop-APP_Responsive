@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/DioHelper/DioHelper.dart';
 import 'package:shop_app/constant/constant.dart';
-import 'package:shop_app/models/SearchModel/SearchCubit/SearchStates.dart';
 import 'package:shop_app/models/SearchModel/SearchModel.dart';
+
+import 'SearchStates.dart';
 
 class SearchCubit extends Cubit<SearchStates>{
   SearchCubit() : super(InitialSearchState());

@@ -3,40 +3,43 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app/LoginCubit/LoginCubit.dart';
-import 'package:shop_app/LoginCubit/LoginStates.dart';
-import 'package:shop_app/cacheHelper/CacheHelper.dart';
-import 'package:shop_app/constant/constant.dart';
-import 'package:shop_app/modules/Home/HomeScreen.dart';
-import 'package:shop_app/modules/login/Register/registerScreen.dart';
+import 'package:shop_app/modules/login/Register/RegisterCubit/RegisterCubit.dart';
+import 'package:shop_app/modules/login/Register/RegisterCubit/RegisterStates.dart';
 
-class LoginShopApp extends StatelessWidget {
-  const LoginShopApp({Key? key}) : super(key: key);
+import '../../../LoginCubit/LoginCubit.dart';
+import '../../../cacheHelper/CacheHelper.dart';
+import '../../../constant/constant.dart';
+import '../../Home/HomeScreen.dart';
+
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
+    var RegisterEmailController = TextEditingController();
+    var RegisterPasswordController = TextEditingController();
+    var RegisterPhoneController = TextEditingController();
+    var RegisternameController = TextEditingController();
     var formKey = GlobalKey<FormState>();
 
     return BlocProvider(
-      create: (BuildContext context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginState>(
+      create: (BuildContext context) => RegisterCubit(),
+      child: BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {
-          if (state is LoginSuccessState) {
-            if (state.shopLoginModel.status) {
+          if (state is RegisterSuccessState) {
+            if (RegisterCubit.get(context).registerModel!.status!) {
               CacheHelper.saveData(
-                  key: 'token', value: state.shopLoginModel.data?.token).then((value) {
-                    token = state.shopLoginModel.data?.token;
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  key: 'token', value: RegisterCubit.get(context).registerModel!.data?.token).then((value) {
+                token = RegisterCubit.get(context).registerModel!.data?.token;
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                       (route) => false,
-                    );
+                );
               });
 
               Fluttertoast.showToast(
-                  msg: '${LoginCubit.get(context).shopLoginModel!.massage}',
+                  msg: '${RegisterCubit.get(context).registerModel!.message}',
                   toastLength: Toast.LENGTH_LONG,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 5,
@@ -45,7 +48,7 @@ class LoginShopApp extends StatelessWidget {
                   fontSize: 16.0);
             } else {
               Fluttertoast.showToast(
-                  msg: '${LoginCubit.get(context).shopLoginModel!.massage}',
+                  msg: '${RegisterCubit.get(context).registerModel!.message}',
                   toastLength: Toast.LENGTH_LONG,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 5,
@@ -67,7 +70,7 @@ class LoginShopApp extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'LOGIN',
+                        'Register',
                         style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
@@ -77,18 +80,18 @@ class LoginShopApp extends StatelessWidget {
                         height: 10.0,
                       ),
                       const Text(
-                        'this is a login screen for shop app',
+                        'this is a register screen for shop app',
                       ),
                       const SizedBox(
                         height: 30.0,
                       ),
                       TextFormField(
-                        controller: emailController,
-                        keyboardType: TextInputType.emailAddress,
+                        controller: RegisternameController,
+                        keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
-                          label: Text('Email'),
+                          label: Text('Name'),
                           prefixIcon: Icon(
-                            Icons.email_outlined,
+                            Icons.person,
                           ),
                           border: OutlineInputBorder(),
                         ),
@@ -103,7 +106,29 @@ class LoginShopApp extends StatelessWidget {
                         height: 15.0,
                       ),
                       TextFormField(
-                        controller: passwordController,
+                        controller: RegisterEmailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(
+                            Icons.email,
+                          ),
+                          label: Text(
+                            'email',
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'this field must not be empty';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      TextFormField(
+                        controller: RegisterPasswordController,
                         obscureText: LoginCubit.get(context).obscurePassword,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -132,6 +157,28 @@ class LoginShopApp extends StatelessWidget {
                         },
                       ),
                       const SizedBox(
+                        height: 15.0,
+                      ),
+                      TextFormField(
+                        controller: RegisterPhoneController,
+                        keyboardType: TextInputType.phone,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(
+                            Icons.phone,
+                          ),
+                          label: Text(
+                            'phone',
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'this field must not be empty';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
                         height: 20.0,
                       ),
                       ConditionalBuilder(
@@ -142,45 +189,28 @@ class LoginShopApp extends StatelessWidget {
                           child: MaterialButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                LoginCubit.get(context).postData(
-                                    email: emailController.text,
-                                    password: passwordController.text);
+                                RegisterCubit.get(context).register(
+                                  name: RegisternameController.text,
+                                  email: RegisterEmailController.text,
+                                  phone: RegisterPhoneController.text,
+                                  password: RegisterPasswordController.text,
+                                );
                               }
                             },
                             child: const Text(
-                              'LOGIN',
+                              'Register',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
                             ),
                           ),
                         ),
-                        condition: state is! LoginLoadingState,
+                        condition: state is! RegisterLoadingState,
                         fallback: (context) =>
-                            const Center(child: CircularProgressIndicator()),
+                        const Center(child: CircularProgressIndicator()),
                       ),
                       const SizedBox(
                         height: 20.0,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "don't have an account?",
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterScreen()),
-                              );
-                            },
-                            child: const Text(
-                              'Register now',
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
