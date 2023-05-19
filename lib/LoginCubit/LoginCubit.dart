@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/DioHelper/DioHelper.dart';
-import 'package:shop_app/LoginCubit/LoginStates.dart';
-import 'package:shop_app/cacheHelper/CacheHelper.dart';
 import 'package:shop_app/models/LoginModel/LoginModel.dart';
+
+import 'LoginStates.dart';
 
 class LoginCubit extends Cubit<LoginState>{
 
@@ -13,6 +13,7 @@ class LoginCubit extends Cubit<LoginState>{
 
   static LoginCubit get(context) => BlocProvider.of(context);
   LoginModel? shopLoginModel;
+
   void postData({
     required String email,
     required String password,
