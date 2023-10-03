@@ -44,19 +44,19 @@ class MyApp extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) => MaterialApp(
           theme: ThemeData(
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.white,
+            appBarTheme: AppBarTheme(
+              backgroundColor: myColor,
               elevation: 0.0,
-              actionsIconTheme: IconThemeData(
-                color: Colors.black,
+              actionsIconTheme: const IconThemeData(
+                color: Colors.white,
               ),
-              titleTextStyle: TextStyle(
-                color: Colors.black,
+              titleTextStyle: const TextStyle(
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
               ),
-              iconTheme: IconThemeData(
-                color: Colors.black,
+              iconTheme: const IconThemeData(
+                color: Colors.white,
               ),
             ),
             scaffoldBackgroundColor: Colors.white,

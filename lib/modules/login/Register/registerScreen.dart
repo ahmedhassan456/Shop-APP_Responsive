@@ -59,160 +59,219 @@ class RegisterScreen extends StatelessWidget {
           }
         },
         builder: (context, state) => Scaffold(
-          appBar: AppBar(),
+          backgroundColor: myColor,
+          appBar: AppBar(
+            backgroundColor: myColor,
+          ),
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Register',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      const Text(
-                        'this is a register screen for shop app',
-                      ),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      TextFormField(
-                        controller: RegisternameController,
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          label: Text('Name'),
-                          prefixIcon: Icon(
-                            Icons.person,
-                          ),
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'this field must not be empty';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      TextFormField(
-                        controller: RegisterEmailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(
-                            Icons.email,
-                          ),
-                          label: Text(
-                            'email',
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'this field must not be empty';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      TextFormField(
-                        controller: RegisterPasswordController,
-                        obscureText: LoginCubit.get(context).obscurePassword,
-                        keyboardType: TextInputType.visiblePassword,
-                        decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(
-                            Icons.password,
-                          ),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              LoginCubit.get(context)
-                                  .changeItemPasswordLoginScreen();
-                            },
-                            icon: Icon(
-                              LoginCubit.get(context).passwordIcon,
-                            ),
-                          ),
-                          label: const Text(
-                            'password',
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'this field must not be empty';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      TextFormField(
-                        controller: RegisterPhoneController,
-                        keyboardType: TextInputType.phone,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(
-                            Icons.phone,
-                          ),
-                          label: Text(
-                            'phone',
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'this field must not be empty';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      ConditionalBuilder(
-                        builder: (context) => Container(
-                          width: double.infinity,
-                          height: 40.0,
-                          color: Colors.blue,
-                          child: MaterialButton(
-                            onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                RegisterCubit.get(context).register(
-                                  name: RegisternameController.text,
-                                  email: RegisterEmailController.text,
-                                  phone: RegisterPhoneController.text,
-                                  password: RegisterPasswordController.text,
-                                );
-                              }
-                            },
-                            child: const Text(
+              child: Container(
+                height: 530.0,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
                               'Register',
+                              style: TextStyle(
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            const Text(
+                              'this is a register screen for shop app',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
                             ),
-                          ),
+                            const SizedBox(
+                              height: 30.0,
+                            ),
+                            TextFormField(
+                              controller: RegisternameController,
+                              keyboardType: TextInputType.text,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                              decoration: InputDecoration(
+                                label: const Text(
+                                    'Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'this field must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 15.0,
+                            ),
+                            TextFormField(
+                              controller: RegisterEmailController,
+                              keyboardType: TextInputType.emailAddress,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.email,
+                                  color: Colors.white,
+                                ),
+                                label: const Text(
+                                  'email',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'this field must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 15.0,
+                            ),
+                            TextFormField(
+                              controller: RegisterPasswordController,
+                              obscureText: LoginCubit.get(context).obscurePassword,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                              keyboardType: TextInputType.visiblePassword,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.password,
+                                  color: Colors.white,
+                                ),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    LoginCubit.get(context)
+                                        .changeItemPasswordLoginScreen();
+                                  },
+                                  icon: Icon(
+                                    LoginCubit.get(context).passwordIcon,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                label: const Text(
+                                  'password',
+                                  style: TextStyle(
+                                    color: Colors.white
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'this field must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 15.0,
+                            ),
+                            TextFormField(
+                              controller: RegisterPhoneController,
+                              keyboardType: TextInputType.phone,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.phone,
+                                  color: Colors.white,
+                                ),
+                                label: Text(
+                                  'phone',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'this field must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            ConditionalBuilder(
+                              builder: (context) => Container(
+                                width: double.infinity,
+                                height: 40.0,
+                                color: myColor,
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      RegisterCubit.get(context).register(
+                                        name: RegisternameController.text,
+                                        email: RegisterEmailController.text,
+                                        phone: RegisterPhoneController.text,
+                                        password: RegisterPasswordController.text,
+                                      );
+                                    }
+                                  },
+                                  child: const Text(
+                                    'Register',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              condition: state is! RegisterLoadingState,
+                              fallback: (context) =>
+                              const Center(child: CircularProgressIndicator()),
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                          ],
                         ),
-                        condition: state is! RegisterLoadingState,
-                        fallback: (context) =>
-                        const Center(child: CircularProgressIndicator()),
                       ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
