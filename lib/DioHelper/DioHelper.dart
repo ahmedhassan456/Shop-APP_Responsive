@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:shop_app/constant/constant.dart';
-
 class DioHelper {
   static Dio? dio;
 

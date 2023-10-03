@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/LoginCubit/LoginCubit.dart';
 import 'package:shop_app/cacheHelper/CacheHelper.dart';
+import 'package:shop_app/constant/constant.dart';
 import 'package:shop_app/modules/login/LoginShopApp.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -125,8 +126,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 SmoothPageIndicator(
                   controller: pageViewController,
                   count: boarding.length,
-                  effect: const ExpandingDotsEffect(
-                    activeDotColor: Colors.blue,
+                  effect: ExpandingDotsEffect(
+                    activeDotColor: myColor,
                     dotColor: Colors.grey,
                     dotHeight: 12.0,
                     dotWidth: 12.0,
@@ -134,6 +135,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
                 const Spacer(),
                 FloatingActionButton(
+                  backgroundColor: myColor,
                   onPressed: () {
                     setState(() {
                       if (isLast) {
