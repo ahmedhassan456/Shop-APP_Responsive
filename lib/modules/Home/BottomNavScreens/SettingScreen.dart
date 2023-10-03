@@ -6,7 +6,6 @@ import 'package:shop_app/HomeCubit/HomeStates.dart';
 import 'package:shop_app/cacheHelper/CacheHelper.dart';
 import 'package:shop_app/constant/constant.dart';
 import 'package:shop_app/modules/login/LoginShopApp.dart';
-
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
@@ -23,97 +22,101 @@ class SettingsScreen extends StatelessWidget {
         nameController.text = cubit!.data!.name;
         emailController.text = cubit.data!.email;
         phoneController.text = cubit.data!.phone;
-        return Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 100.0,
-                  backgroundColor: Colors.white,
-                  child: Image(
-                    image:NetworkImage('${cubit?.data?.image}'),
-                    height: 100.0,
-                    width: 100.0,
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 80.0,
+                    backgroundColor: myColor,
+                    child: const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                      size: 100.0,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20.0,),
-                TextFormField(
-                  controller: nameController,
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return 'name must not be empty';
-                    }
-                    return null;
-                  },
-                  enabled: cubitEnabled.enabled,
-                  decoration: const InputDecoration(
-                    label: Text('Name'),
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                ),
-                const SizedBox(height: 10.0,),
-                TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return 'email must not be empty';
-                    }
-                    return null;
-                  },
-                  enabled: cubitEnabled.enabled,
-                  decoration: const InputDecoration(
-                    label: Text('Email'),
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.email),
-                  ),
-                ),
-                const SizedBox(height: 10.0,),
-                TextFormField(
-                  controller: phoneController,
-                  keyboardType: TextInputType.phone,
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return 'phone must not be empty';
-                    }
-                    return null;
-                  },
-                  enabled: cubitEnabled.enabled,
-                  decoration: const InputDecoration(
-                    label: Text('Phone'),
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.phone_android),
-                  ),
-                ),
-                Row(
-                  children: [
-                    const Spacer(),
-                    IconButton(onPressed: (){
-                      cubitEnabled.changeEnabled();
-                    }, icon: const Icon(Icons.edit_note,),),
-                  ],
-                ),
-                Container(
-                  width: double.infinity,
-                  child: MaterialButton(
-                    onPressed: (){
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginShopApp()), (route) => false);
-                      CacheHelper.removeData(key: 'token');
+                  const SizedBox(height: 20.0,),
+                  TextFormField(
+                    controller: nameController,
+                    keyboardType: TextInputType.name,
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return 'name must not be empty';
+                      }
+                      return null;
                     },
-                    height: 40.0,color: Colors.blue,
-                    child: const Text(
-                      'Logout',
-                      style: TextStyle(
-                        color: Colors.white,
+                    enabled: cubitEnabled.enabled,
+                    decoration: const InputDecoration(
+                      label: Text('Name'),
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.person),
+                    ),
+                  ),
+                  const SizedBox(height: 10.0,),
+                  TextFormField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return 'email must not be empty';
+                      }
+                      return null;
+                    },
+                    enabled: cubitEnabled.enabled,
+                    decoration: const InputDecoration(
+                      label: Text('Email'),
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.email),
+                    ),
+                  ),
+                  const SizedBox(height: 10.0,),
+                  TextFormField(
+                    controller: phoneController,
+                    keyboardType: TextInputType.phone,
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return 'phone must not be empty';
+                      }
+                      return null;
+                    },
+                    enabled: cubitEnabled.enabled,
+                    decoration: const InputDecoration(
+                      label: Text('Phone'),
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.phone_android),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      IconButton(onPressed: (){
+                        cubitEnabled.changeEnabled();
+                      }, icon: const Icon(Icons.edit_note,),),
+                    ],
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: myColor,
+                    child: MaterialButton(
+                      onPressed: (){
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginShopApp()), (route) => false);
+                        CacheHelper.removeData(key: 'token');
+                      },
+                      height: 40.0,
+                      color: myColor,
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

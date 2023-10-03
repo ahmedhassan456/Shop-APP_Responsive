@@ -75,25 +75,18 @@ class ProductsScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 5.0,
+            height: 10.0,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Categories',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
                 const SizedBox(
                   height: 10.0,
                 ),
                 Container(
-                  height: 100.0,
+                  height: 35.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
@@ -137,28 +130,23 @@ class ProductsScreen extends StatelessWidget {
       ),
     );
   }
-  Widget buildCategoryItem(ListDataCategories model) => Stack(
-    alignment: AlignmentDirectional.bottomCenter,
-    children: [
-      Image(
-        image: NetworkImage(
-            '${model.image}'),
-        height: 100.0,
-        width: 100.0,
-        fit: BoxFit.cover,
+  Widget buildCategoryItem(ListDataCategories model) => Container(
+    height: 35.0,
+    decoration: BoxDecoration(
+      color: Colors.grey[300],
+      borderRadius: BorderRadius.circular(15.0),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(7.0),
+      child: Text('${model.name}',
+        textAlign: TextAlign.center,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(
+          color: Colors.black,
+        ),
       ),
-      Container(
-        width: 100.0,
-        color: Colors.black.withOpacity(0.8),
-        child: Text('${model.name}',
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: Colors.white,
-          ),),
-      ),
-    ],
+    ),
   );
 
   Widget productsItem(HomeProducts model , context) => Container(

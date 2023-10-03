@@ -60,6 +60,25 @@ class MyApp extends StatelessWidget {
               ),
             ),
             scaffoldBackgroundColor: Colors.white,
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              elevation: 0.0,
+              backgroundColor: myColor,
+              selectedIconTheme: const IconThemeData(
+                color: Colors.white,
+              ),
+              selectedLabelStyle: const TextStyle(
+                color: Colors.white,
+              ),
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white.withOpacity(0.5),
+              unselectedIconTheme: IconThemeData(
+                color: Colors.white.withOpacity(0.5),
+              ),
+              unselectedLabelStyle: TextStyle(
+                color: Colors.white.withOpacity(0.5),
+              ),
+            ),
           ),
           home: token ? const HomeScreen() : const OnBoardingScreen(),
           debugShowCheckedModeBanner: false,

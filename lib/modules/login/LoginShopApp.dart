@@ -199,7 +199,7 @@ class LoginShopApp extends StatelessWidget {
                               ),
                               condition: state is! LoginLoadingState,
                               fallback: (context) =>
-                                  const Center(child: CircularProgressIndicator()),
+                                  const Center(child: CircularProgressIndicator(color: Colors.white,)),
                             ),
                             const SizedBox(
                               height: 20.0,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/HomeCubit/HomeCubit.dart';
 import 'package:shop_app/HomeCubit/HomeStates.dart';
+import 'package:shop_app/constant/constant.dart';
 
 import 'Search/SearchScreen.dart';
 
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) => Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: myColor,
           elevation: 0.0,
           title: const Text('SAQR'),
           actions: [
@@ -28,6 +29,9 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ],
+          leading: const Icon(
+            Icons.dehaze,
+          ),
         ),
         body: cubit.screens[cubit.currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -46,9 +50,9 @@ class HomeScreen extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-              Icons.settings,
+              Icons.person,
             ),
-              label: 'Settings'
+              label: 'Profile'
             ),
           ],
           type: BottomNavigationBarType.fixed,

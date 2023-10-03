@@ -263,7 +263,7 @@ class RegisterScreen extends StatelessWidget {
                               ),
                               condition: state is! RegisterLoadingState,
                               fallback: (context) =>
-                              const Center(child: CircularProgressIndicator()),
+                              const Center(child: CircularProgressIndicator(color: Colors.white,)),
                             ),
                             const SizedBox(
                               height: 20.0,
