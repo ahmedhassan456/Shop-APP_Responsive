@@ -9,6 +9,7 @@ import 'package:shop_app/HomeCubit/HomeCubit.dart';
 import 'package:shop_app/HomeCubit/HomeStates.dart';
 import 'package:shop_app/models/CategoriesModel/CategoriesModel.dart';
 import 'package:shop_app/models/HomeModel/HomeModel.dart';
+import 'package:shop_app/modules/Home/ItemView/ItemViewScreen.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -122,7 +123,12 @@ class ProductsScreen extends StatelessWidget {
               crossAxisCount: 2,
               children: List.generate(
                 model.data!.products.length,
-                (index) => productsItem(model.data!.products[index], context),
+                (index) => InkWell(
+                  child: productsItem(model.data!.products[index], context),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ViewItemScreen(index,model)));
+                  },
+                ),
               ),
             ),
           ),

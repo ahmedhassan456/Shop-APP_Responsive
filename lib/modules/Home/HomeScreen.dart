@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/HomeCubit/HomeCubit.dart';
 import 'package:shop_app/HomeCubit/HomeStates.dart';
+import 'package:shop_app/SearchCubit/SearchCubit.dart';
 import 'package:shop_app/constant/constant.dart';
 
 import 'Search/SearchScreen.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: myColor,
           elevation: 0.0,
-          title: const Text('SAQR'),
+          title: const Center(child: Text('SAQR')),
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
