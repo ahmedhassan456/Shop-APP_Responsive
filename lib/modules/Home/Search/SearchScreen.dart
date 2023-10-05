@@ -21,46 +21,47 @@ class SearchScreen extends StatelessWidget {
         builder: (context, state) =>
             Scaffold(
               appBar: AppBar(),
-              body: ConditionalBuilder(
-                condition: state is SearchLoadingState,
-                builder: (context) => Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Form(
-                    key: searchKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextFormField(
-                          controller: searchController,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'this field must not be empty';
-                            }
-                            return null;
-                          },
-                          onFieldSubmitted: (String value){
-                            SearchCubit.get(context).search(text: value);
-                          },
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text('Search'),
-                            prefixIcon: Icon(Icons.search),
-                          ),
+              body: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: searchKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        controller: searchController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'this field must not be empty';
+                          }
+                          return null;
+                        },
+                        onFieldSubmitted: (String value){
+                          SearchCubit.get(context).search(text: value);
+                        },
+                        keyboardType: TextInputType.text,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text('Search'),
+                          hintText: "Apple",
+                          prefixIcon: Icon(Icons.search),
                         ),
-                        const SizedBox(
-                          height: 15.0,
-                        ),
-                        ListView.separated(
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      ConditionalBuilder(
+                        condition: state is SearchLoadingState,
+                        builder: (context) => ListView.separated(
                           itemBuilder: (context , index) => searchItem(SearchCubit.get(context).model!.data!.data![index]),
                           separatorBuilder:(context, index) => const SizedBox(height: 5.0,),
                           itemCount: SearchCubit.get(context).model!.data!.data!.length,
                         ),
-                      ],
-                    ),
+                        fallback: (context) => const Center(child: CircularProgressIndicator()),
+                      ),
+                    ],
                   ),
                 ),
-                fallback: (context) => const Center(child: CircularProgressIndicator()),
               ),
             ),
       ),
