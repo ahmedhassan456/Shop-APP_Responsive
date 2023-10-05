@@ -8,7 +8,12 @@ A Shop Application using Flutter.
 - Flutter Cubit
 - Dio Helper
 - Flutter Toast
-- 
+- Smooth Page Indicator
+- Conditional Builder Null Safety
+- Shared Preferences
+- Carousel Slider
+
+## Screens
 
 
 
